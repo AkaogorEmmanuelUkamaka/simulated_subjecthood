@@ -141,6 +141,8 @@ Launch the Streamlit dashboard:
 
 ```bash
 streamlit run dashboard/Home.py
+or
+python -m streamlit run dashboard/Home.py
 ```
 
 ---
