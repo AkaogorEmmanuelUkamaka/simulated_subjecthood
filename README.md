@@ -1,5 +1,11 @@
 # Operational Evaluation of Governance Risks in Simulated Subjecthood
 
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B.svg)](https://simulated-subjecthood.streamlit.app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub Release](https://img.shields.io/github/v/release/AkaogorEmmanuelUkamaka/simulated_subjecthood)](https://github.com/AkaogorEmmanuelUkamaka/simulated_subjecthood/releases)
+[![Dashboard](https://img.shields.io/badge/Dashboard-Online-success.svg)](https://simulated-subjecthood.streamlit.app)
+
 An interactive research dashboard and reproducible analytical pipeline for evaluating governance risks associated with **Simulated Subjecthood** in AI-enabled decision-making systems.
 
 ---
