@@ -172,31 +172,6 @@ The empirical analyses presented in this project use the publicly available **He
 Dataset:
 <https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction>
 
----
-
-## 📚 Citation
-
-If you use this repository in academic work, please cite the accompanying research paper:
-
-> **Operational Evaluation of Governance Risks in Simulated Subjecthood**
-
-(Full citation will be added upon publication.)
-
----
-
-## 👨‍💻 Author
-
-**Emmanuel Ukamaka Akaogor**
-
-Mechanical Engineer | Data Analyst | AI Governance Researcher
-
-**GitHub:**  
-<https://github.com/AkaogorEmmanuelUkamaka>
-
-**LinkedIn:**  
-*Add your LinkedIn profile URL here.*
-
----
 
 ## 🙏 Acknowledgements
 
