@@ -1,0 +1,5 @@
+Metric,Best Group,Worst Group,Best Value,Worst Value,Disparity
+Accuracy,F,M,0.921,0.877,0.044
+Precision,M,F,0.882,0.714,0.168
+Recall,M,F,0.938,0.833,0.104
+F1 Score,M,F,0.909,0.769,0.14

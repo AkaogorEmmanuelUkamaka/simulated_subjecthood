@@ -1,0 +1,6 @@
+Metric,Mean,Lower 95% CI,Upper 95% CI
+Accuracy,0.885,0.837,0.929
+Precision,0.87,0.806,0.931
+Recall,0.931,0.878,0.979
+F1 Score,0.899,0.856,0.94
+ROC AUC,0.93,0.891,0.964

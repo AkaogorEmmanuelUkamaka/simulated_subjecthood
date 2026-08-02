@@ -1,0 +1,4 @@
+Threshold,Allocated,Not Allocated,Allocation Rate
+0.3,116,68,0.63
+0.5,109,75,0.592
+0.7,88,96,0.478

@@ -1,0 +1,4 @@
+Model,Brier Score
+Logistic Regression,0.096
+Random Forest,0.1
+XGBoost,0.115
