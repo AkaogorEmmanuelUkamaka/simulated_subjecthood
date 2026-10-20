@@ -1,0 +1,14 @@
+# Install with Python 3.11 or newer.
+# These are direct runtime and notebook dependencies. Versions are intentionally
+# unpinned until a clean deployment environment has been installed and tested.
+numpy
+pandas
+scikit-learn
+scipy
+xgboost
+matplotlib
+seaborn
+streamlit
+joblib
+jupyter
+ipykernel
