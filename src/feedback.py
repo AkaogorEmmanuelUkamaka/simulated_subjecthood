@@ -1,195 +1,94 @@
 """
-Feedback contamination functions for the empirical validation pipeline.
+Feedback and illustrative-decay functions for the governance case study.
 
-This module provides reusable functions for simulating
-feedback contamination, recursive retraining,
-and performance degradation caused by governance feedback loops.
-
-Project:
-Operational Evaluation of Governance Risks in Simulated Subjecthood
+The deterministic accuracy sequence is a scenario illustration, not
+repeated model retraining or evidence that feedback caused degradation.
 """
 
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
-
-# ==========================================================
-# Differential Follow-up
-# ==========================================================
 
 def simulate_differential_follow_up(
     predictions,
     follow_up_rate: float = 0.80,
-):
-    """
-    Simulate differential follow-up.
+    random_state: int = 42,
+) -> pd.Series:
+    """Give positive predictions a probabilistic follow-up; negatives get none."""
+    if not 0 <= follow_up_rate <= 1:
+        raise ValueError("follow_up_rate must be between 0 and 1.")
 
-    Positive predictions receive more follow-up
-    than negative predictions.
-
-    Args:
-        predictions:
-            Binary predictions.
-
-        follow_up_rate:
-            Proportion of positive cases retained.
-
-    Returns:
-        Follow-up indicator.
-    """
-
-    follow_up = []
-
-    for prediction in predictions:
-
-        if prediction == 1:
-            follow_up.append(
-                int(
-                    pd.Series([1]).sample(
-                        frac=follow_up_rate
-                    ).size > 0
-                )
-            )
-
-        else:
-            follow_up.append(0)
-
+    rng = np.random.default_rng(random_state)
+    follow_up = [
+        int(rng.random() < follow_up_rate) if prediction == 1 else 0
+        for prediction in predictions
+    ]
     return pd.Series(follow_up)
 
-
-# ==========================================================
-# Documentation Completeness
-# ==========================================================
 
 def simulate_documentation_completeness(
     dataframe: pd.DataFrame,
     completeness: float = 0.90,
+    random_state: int = 42,
 ) -> pd.DataFrame:
-    """
-    Simulate documentation loss.
+    """Illustrate documentation loss by retaining a fraction of rows."""
+    if not 0 <= completeness <= 1:
+        raise ValueError("completeness must be between 0 and 1.")
+    return dataframe.sample(frac=completeness, random_state=random_state)
 
-    Args:
-        dataframe:
-            Dataset.
-
-        completeness:
-            Fraction of rows retained.
-
-    Returns:
-        Reduced dataset.
-    """
-
-    return dataframe.sample(
-        frac=completeness,
-        random_state=42,
-    )
-
-
-# ==========================================================
-# Recursive Retraining Summary
-# ==========================================================
 
 def create_feedback_summary(
     iterations: int = 5,
-    initial_accuracy: float = 0.88,
+    initial_accuracy: float = 0.886,
     decay: float = 0.02,
 ) -> pd.DataFrame:
     """
-    Simulate gradual model degradation.
+    Create a deterministic illustrative accuracy sequence.
 
-    Args:
-        iterations:
-            Number of retraining cycles.
-
-        initial_accuracy:
-            Starting model accuracy.
-
-        decay:
-            Accuracy reduction per cycle.
-
-    Returns:
-        Summary DataFrame.
+    This function does not alter data, retrain a model, or calculate
+    accuracy from predictions. It subtracts a specified decrement per
+    iteration to display a hypothetical trajectory.
     """
+    if iterations < 0:
+        raise ValueError("iterations must be non-negative.")
+    if not 0 <= initial_accuracy <= 1:
+        raise ValueError("initial_accuracy must be between 0 and 1.")
+    if decay < 0:
+        raise ValueError("decay must be non-negative.")
 
     records = []
-
     accuracy = initial_accuracy
-
     for iteration in range(iterations):
-
-        records.append(
-            {
-                "Iteration": iteration + 1,
-                "Accuracy": round(
-                    accuracy,
-                    3,
-                ),
-            }
-        )
-
+        records.append({"Iteration": iteration + 1, "Accuracy": round(accuracy, 3)})
         accuracy -= decay
-
     return pd.DataFrame(records)
 
-
-# ==========================================================
-# Feedback Decay Plot
-# ==========================================================
 
 def plot_feedback_decay(
     feedback_table: pd.DataFrame,
     output_path: Path,
     figsize=(8, 6),
     show: bool = True,
-):
-    """
-    Plot recursive performance decay.
+) -> None:
+    """Save a plot of the illustrative, predefined accuracy sequence."""
+    required_columns = {"Iteration", "Accuracy"}
+    if not required_columns.issubset(feedback_table.columns):
+        raise ValueError("feedback_table must contain 'Iteration' and 'Accuracy' columns.")
 
-    Args:
-        feedback_table:
-            Summary table.
-
-        output_path:
-            Figure destination.
-
-        figsize:
-            Figure size.
-
-        show:
-            Display figure.
-    """
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     plt.figure(figsize=figsize)
-
-    plt.plot(
-        feedback_table["Iteration"],
-        feedback_table["Accuracy"],
-        marker="o",
-    )
-
-    plt.xlabel("Retraining Iteration")
-    plt.ylabel("Accuracy")
-
-    plt.title(
-        "Figure 7: Recursive Feedback Performance Decay"
-    )
-
+    plt.plot(feedback_table["Iteration"], feedback_table["Accuracy"], marker="o")
+    plt.xlabel("Illustrative Iteration")
+    plt.ylabel("Illustrative Accuracy")
+    plt.title("Figure 7: Illustrative Feedback-Decay Scenario")
     plt.grid(True)
-
     plt.tight_layout()
-
-    plt.savefig(
-        output_path,
-        dpi=300,
-        bbox_inches="tight",
-    )
-
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
     if show:
         plt.show()
-
     plt.close()
-
-
-    
