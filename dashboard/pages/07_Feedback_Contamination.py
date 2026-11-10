@@ -1,11 +1,12 @@
+
 """
 Feedback Contamination Dashboard Page.
 
-This page presents the empirical results for Section 4.5:
-Feedback Contamination.
+This page presents the feedback analysis associated with
+Section 4.5 of the paper.
 
 Project:
-Operational Evaluation of Governance Risks in Simulated Subjecthood
+Simulated Subjecthood and the Governance of Computational Representation
 """
 
 import sys
@@ -42,57 +43,84 @@ section_header("🔄 Feedback Contamination")
 
 st.markdown(
     """
-This page presents the empirical evaluation of **Feedback
-Contamination**, corresponding to **Section 4.5** of the paper.
+This page presents the feedback analysis associated with
+**Section 4.5** of the paper.
 
-Feedback Contamination arises when the outputs of AI systems are
-fed back into subsequent decision-making processes, reinforcing
-existing patterns and potentially amplifying governance risks over
-time.
+**Feedback Contamination** describes the potential for outputs
+from computational systems to influence subsequent data,
+decisions, or system operations. When these outputs are reused
+without adequate scrutiny, existing patterns and errors may
+be carried into later decision-making processes.
 
-The empirical simulations examine differential follow-up,
-documentation completeness, and recursive performance degradation
-resulting from repeated governance feedback loops.
+The analysis includes an illustrative performance trajectory
+and feedback-related scenarios involving differential follow-up
+and documentation completeness.
+
+**Interpretive limitation:** The performance trajectory uses
+a fixed decrement of 0.020 per iteration. It does not involve
+retraining the model on feedback-modified data. Consequently,
+it illustrates a hypothetical decline in performance rather
+than empirically demonstrating recursive feedback, cumulative
+bias propagation, or actual model degradation.
 """
 )
 
 
 # ==========================================================
-# Summary Statistics
+# Analysis Overview
 # ==========================================================
 
-section_header("📊 Summary Statistics")
+section_header("📊 Analysis Overview")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
-        "Scenarios",
-        "2",
+        "Analysis",
+        "Illustrative Feedback Simulation",
     )
 
 with col2:
     st.metric(
         "Publication Outputs",
-        "Figure 7 • Table 7",
+        "Figure 6 • Table 8",
     )
 
 with col3:
     st.metric(
         "Governance Focus",
-        "Feedback Loops",
+        "Feedback Contamination",
     )
 
 
 # ==========================================================
-# Publication Figure
+# Figure 6: Illustrative Performance Trajectory
 # ==========================================================
 
-section_header("📈 Publication Figure")
+section_header("📈 Illustrative Performance Trajectory")
 
 display_figure(
     "figure_7_feedback_decay.png",
-    caption="Figure 7. Feedback Decay",
+    caption=(
+        "Figure 6. Performance Trajectory Across Simulated "
+        "Deployment Iterations."
+    ),
+)
+
+st.markdown(
+    """
+The figure presents an illustrative performance trajectory
+across simulated deployment iterations.
+
+The simulation applies a fixed decrement of 0.020 to the
+initial accuracy estimate at each successive iteration.
+The resulting trajectory therefore represents a specified
+scenario rather than performance measured through repeated
+model training or evaluation on feedback-modified data.
+
+It should not be interpreted as independent evidence that
+deployed systems necessarily experience the same pattern.
+"""
 )
 
 
@@ -104,29 +132,42 @@ section_header("💡 Interpretation")
 
 st.info(
     """
-The feedback contamination simulation demonstrates how governance
-risks can accumulate when algorithmic outputs are repeatedly fed
-back into future decision-making processes.
+Feedback mechanisms are important to AI governance because
+system outputs may influence the information and decisions
+used in subsequent stages of a process.
 
-Differential follow-up and incomplete documentation introduce
-systematic distortions that compound over successive iterations,
-leading to gradual performance degradation and reinforcing existing
-biases. These findings highlight the importance of monitoring
-feedback loops within AI-enabled governance systems.
+For example, differential follow-up may affect which cases
+receive additional attention, while incomplete documentation
+may affect the information available to later decision-makers.
+
+These mechanisms raise questions about how information is
+retained, reviewed, and reused.
+
+However, demonstrating cumulative performance degradation
+requires a clearly specified iterative model, documented
+parameters, and evidence from successive evaluations using
+appropriately updated data or model states.
+
+The current performance trajectory uses a fixed decrement.
+It therefore illustrates a hypothetical pattern rather than
+establishing that feedback has caused actual performance
+degradation or bias reinforcement.
 """
 )
 
 
 # ==========================================================
-# Publication Table
+# Table 8: Feedback Metrics
 # ==========================================================
 
-section_header("📄 Publication Table")
+section_header("📄 Table 8. Feedback Metrics")
 
 st.markdown(
     """
-The table below summarises the feedback contamination metrics
-generated during the empirical validation pipeline.
+Table 8 presents the feedback-related metrics generated
+by the analysis pipeline. These results should be interpreted
+in the context of the assumptions and procedures used to
+construct the simulation.
 """
 )
 
@@ -134,9 +175,56 @@ feedback_table = load_table(
     "table_7_feedback_metrics.csv"
 )
 
-st.dataframe(
-    feedback_table,
-    use_container_width=True,
+if feedback_table is not None and not feedback_table.empty:
+
+    st.dataframe(
+        feedback_table,
+        use_container_width=True,
+        hide_index=True,
+    )
+
+else:
+    st.warning(
+        "Table 8 could not be loaded or contains no data."
+    )
+
+
+# ==========================================================
+# Scope and Limitations
+# ==========================================================
+
+section_header("🔎 Scope and Limitations")
+
+st.markdown(
+    """
+The feedback analysis should be interpreted with attention
+to the following distinctions:
+
+- **Feedback mechanism:** Describes how system outputs may
+  enter subsequent data or decision-making processes.
+
+- **Illustrative simulation:** Demonstrates a hypothetical
+  performance trajectory under specified assumptions.
+
+- **Fixed decrement:** The performance trajectory applies
+  a predetermined reduction of 0.020 per iteration.
+
+- **Recursive propagation:** Requires evidence that effects
+  persist or change through successive feedback processes.
+
+- **Model retraining:** The current simulation does not
+  retrain the model using feedback-modified observations.
+
+- **Performance degradation:** The simulated decline does
+  not independently establish empirically observed
+  performance degradation.
+
+- **Bias reinforcement:** Requires an appropriate baseline
+  and evidence that disparities are maintained or increased.
+
+These are related but distinct claims. The illustrative
+simulation does not independently establish all of them.
+"""
 )
 
 
@@ -146,14 +234,14 @@ st.dataframe(
 
 section_header("📥 Downloads")
 
-with st.container():
-
-    csv = feedback_table.to_csv(index=False).encode("utf-8")
+if feedback_table is not None and not feedback_table.empty:
 
     st.download_button(
-        label="📥 Download Table 7 (CSV)",
-        data=csv,
-        file_name="table_7_feedback_metrics.csv",
+        label="📥 Download Table 8: Feedback Metrics",
+        data=feedback_table.to_csv(
+            index=False
+        ).encode("utf-8"),
+        file_name="table_8_feedback_metrics.csv",
         mime="text/csv",
     )
 
@@ -164,13 +252,21 @@ with st.container():
 
 section_header("✅ Key Takeaways")
 
-st.success(
+st.markdown(
     """
-- Two feedback contamination scenarios were evaluated: differential follow-up and documentation completeness.
-- Recursive governance feedback loops can progressively degrade system performance over time.
-- Continuous monitoring of feedback mechanisms is essential to prevent the reinforcement of governance risks.
-- Figure 7 and Table 7 constitute the publication-ready outputs for the Feedback Contamination module.
+- The analysis examines feedback-related governance risks.
+- The performance trajectory applies a fixed decrement
+  of 0.020 per simulated iteration.
+- The simulation does not involve retraining on
+  feedback-modified data.
+- Differential follow-up and documentation completeness
+  illustrate possible feedback-related mechanisms.
+- Actual recursive propagation and performance degradation
+  require additional specification and direct testing.
+- The results provide an illustrative basis for discussing
+  feedback contamination in computational systems.
+
+**Publication outputs:** Figure 6 (Performance Trajectory),
+Table 8 (Feedback Metrics).
 """
 )
-
-

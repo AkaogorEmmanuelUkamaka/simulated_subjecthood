@@ -230,7 +230,7 @@ def plot_allocation_simulation(
 
     plt.xlabel("Decision Threshold")
     plt.ylabel("Allocated Cases")
-    plt.title("Figure 6: Allocation Simulation")
+    plt.title("Allocation Outcomes Across Alternative Decision Thresholds")
 
     plt.grid(True)
 

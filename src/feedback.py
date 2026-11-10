@@ -190,7 +190,7 @@ def plot_feedback_decay(
     plt.ylabel("Accuracy")
 
     plt.title(
-        "Figure 7: Illustrative Feedback Performance Decay"
+        "Performance Trajectory Across Simulated Deployment Iterations"
     )
 
     plt.grid(True)

@@ -322,7 +322,7 @@ def plot_roc_curves(
 
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
-    plt.title("Figure 3: ROC Curves")
+    plt.title("ROC Curves for Logistic Regression, Random Forest, and XGBoost")
 
     plt.legend(loc="lower right")
 

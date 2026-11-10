@@ -154,7 +154,7 @@ def plot_governance_tradeoff(
 
     plt.ylabel("Count")
 
-    plt.title("Figure 8: Governance Trade-offs")
+    plt.title("Governance Trade-offs Under Policy and Resource Constraints")
 
     plt.tight_layout()
 
