@@ -144,7 +144,7 @@ def plot_calibration_curve(
 
     plt.xlabel("Mean Predicted Probability")
     plt.ylabel("Observed Frequency")
-    plt.title("Figure 4: Calibration Curves")
+    plt.title("Calibration Curves of the Evaluated Predictive Models")
 
     plt.legend()
 
@@ -199,7 +199,7 @@ def plot_brier_scores(
     plt.ylabel("Brier Score")
     plt.xlabel("Model")
 
-    plt.title("Figure 5: Calibration Error (Brier Scores)")
+    plt.title("Brier Score Comparison Across Predictive Models")
 
     plt.tight_layout()
 

@@ -1,9 +1,10 @@
+
 """
 Feedback contamination functions for the empirical validation pipeline.
 
 This module provides reusable functions for simulating
-feedback contamination, recursive retraining,
-and performance degradation caused by governance feedback loops.
+feedback contamination, documentation loss, and illustrative
+performance degradation associated with governance feedback loops.
 
 Project:
 Operational Evaluation of Governance Risks in Simulated Subjecthood
@@ -12,6 +13,7 @@ Operational Evaluation of Governance Risks in Simulated Subjecthood
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 
@@ -22,39 +24,39 @@ import pandas as pd
 def simulate_differential_follow_up(
     predictions,
     follow_up_rate: float = 0.80,
-):
+    random_state: int = 42,
+) -> pd.Series:
     """
     Simulate differential follow-up.
 
-    Positive predictions receive more follow-up
-    than negative predictions.
+    Positive predictions receive follow-up according to the
+    specified probability. Negative predictions receive no
+    follow-up.
 
     Args:
         predictions:
-            Binary predictions.
+            Iterable of binary predictions (0 or 1).
 
         follow_up_rate:
-            Proportion of positive cases retained.
+            Probability of follow-up for positive predictions,
+            between 0 and 1 inclusive.
+
+        random_state:
+            Random seed for reproducible results.
 
     Returns:
-        Follow-up indicator.
+        A pandas Series containing binary follow-up indicators.
     """
 
-    follow_up = []
+    if not 0 <= follow_up_rate <= 1:
+        raise ValueError("follow_up_rate must be between 0 and 1.")
 
-    for prediction in predictions:
+    rng = np.random.default_rng(random_state)
 
-        if prediction == 1:
-            follow_up.append(
-                int(
-                    pd.Series([1]).sample(
-                        frac=follow_up_rate
-                    ).size > 0
-                )
-            )
-
-        else:
-            follow_up.append(0)
+    follow_up = [
+        int(rng.random() < follow_up_rate) if prediction == 1 else 0
+        for prediction in predictions
+    ]
 
     return pd.Series(follow_up)
 
@@ -68,18 +70,22 @@ def simulate_documentation_completeness(
     completeness: float = 0.90,
 ) -> pd.DataFrame:
     """
-    Simulate documentation loss.
+    Simulate incomplete documentation by retaining a fraction
+    of the dataset's rows.
 
     Args:
         dataframe:
-            Dataset.
+            Input dataset.
 
         completeness:
-            Fraction of rows retained.
+            Fraction of rows to retain, between 0 and 1.
 
     Returns:
-        Reduced dataset.
+        A reduced DataFrame.
     """
+
+    if not 0 <= completeness <= 1:
+        raise ValueError("completeness must be between 0 and 1.")
 
     return dataframe.sample(
         frac=completeness,
@@ -97,35 +103,36 @@ def create_feedback_summary(
     decay: float = 0.02,
 ) -> pd.DataFrame:
     """
-    Simulate gradual model degradation.
+    Create an illustrative performance-decay table.
+
+    This is a deterministic illustration, not an actual
+    repeated model-training experiment.
 
     Args:
         iterations:
-            Number of retraining cycles.
+            Number of illustrative iterations.
 
         initial_accuracy:
-            Starting model accuracy.
+            Starting accuracy value.
 
         decay:
-            Accuracy reduction per cycle.
+            Amount subtracted from accuracy per iteration.
 
     Returns:
-        Summary DataFrame.
+        A DataFrame with iteration numbers and accuracy values.
     """
 
-    records = []
+    if iterations < 0:
+        raise ValueError("iterations must be non-negative.")
 
+    records = []
     accuracy = initial_accuracy
 
     for iteration in range(iterations):
-
         records.append(
             {
                 "Iteration": iteration + 1,
-                "Accuracy": round(
-                    accuracy,
-                    3,
-                ),
+                "Accuracy": round(accuracy, 3),
             }
         )
 
@@ -145,21 +152,31 @@ def plot_feedback_decay(
     show: bool = True,
 ):
     """
-    Plot recursive performance decay.
+    Plot the illustrative performance-decay sequence.
 
     Args:
         feedback_table:
-            Summary table.
+            DataFrame containing 'Iteration' and 'Accuracy'.
 
         output_path:
-            Figure destination.
+            Destination for the saved figure.
 
         figsize:
-            Figure size.
+            Figure dimensions.
 
         show:
-            Display figure.
+            Whether to display the figure.
     """
+
+    required_columns = {"Iteration", "Accuracy"}
+
+    if not required_columns.issubset(feedback_table.columns):
+        raise ValueError(
+            "feedback_table must contain 'Iteration' and 'Accuracy' columns."
+        )
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     plt.figure(figsize=figsize)
 
@@ -169,15 +186,14 @@ def plot_feedback_decay(
         marker="o",
     )
 
-    plt.xlabel("Retraining Iteration")
+    plt.xlabel("Illustrative Iteration")
     plt.ylabel("Accuracy")
 
     plt.title(
-        "Figure 7: Recursive Feedback Performance Decay"
+        "Performance Trajectory Across Simulated Deployment Iterations"
     )
 
     plt.grid(True)
-
     plt.tight_layout()
 
     plt.savefig(
@@ -190,6 +206,3 @@ def plot_feedback_decay(
         plt.show()
 
     plt.close()
-
-
-    

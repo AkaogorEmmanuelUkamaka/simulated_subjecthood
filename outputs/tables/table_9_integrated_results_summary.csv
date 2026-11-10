@@ -1,8 +1,9 @@
 Module,Primary Output
-Dataset Audit,Dataset characteristics established
+Dataset Audit,Dataset characteristics and data quality assessed
 Representational Integrity,Representation quality assessed
-Synthetic Bias Amplification,Predictive performance evaluated
-Validation Illusion,Calibration robustness assessed
-Accountability Diffusion,Resource allocation analysed
-Feedback Contamination,Recursive feedback simulated
-Governance Misfit,Governance constraints evaluated
+Model Performance,Predictive performance compared
+Fairness Evaluation,Subgroup performance differences examined
+Validation Illusion,Robustness and calibration assessed
+Accountability Diffusion,Review allocation simulated
+Feedback Contamination,Differential follow-up and illustrative feedback decay simulated
+Governance Misfit,Policy thresholds and review constraints simulated

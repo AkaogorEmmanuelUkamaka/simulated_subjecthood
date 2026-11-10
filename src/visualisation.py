@@ -44,7 +44,7 @@ def plot_missingness_heatmap(
         yticklabels=False
     )
 
-    plt.title("Figure 1: Missingness Heatmap")
+    plt.title("Missingness Heatmap")
 
     plt.tight_layout()
 
