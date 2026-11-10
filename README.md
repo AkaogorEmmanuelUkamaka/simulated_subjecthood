@@ -12,183 +12,193 @@ An interactive research dashboard and reproducible analytical pipeline for evalu
 
 ## 🌐 Live Dashboard
 
-🔗 **Interactive Dashboard:** <https://simulated-subjecthood.streamlit.app>
+Explore the interactive dashboard:
+
+**[Launch the Simulated Subjecthood Dashboard](https://simulated-subjecthood.streamlit.app)**
 
 ---
 
 ## 🖼️ Dashboard Preview
 
-### 🏠 Home Page
+### 📊 Overall Governance Report
 
-![Dashboard Home](dashboard/assets/images/dashboard_home.png)
+![Overall Governance Report](dashboard/assets/images/governance_report.png)
 
 ---
 
-### 📊 Overall Governance Report
+### 📈 Subgroup Predictive Disparity
 
-![Governance Report](dashboard/assets/images/governance_report.png)
+![Subgroup Predictive Disparity](dashboard/assets/images/subgroup_predictive_disparity.png)
 
 ---
 
 ## 📖 Project Overview
 
-This project presents an operational framework for empirically evaluating governance risks arising from simulated subjecthood in artificial intelligence systems.
+This project develops and operationalises an analytical framework for examining governance risks associated with simulated subjecthood in artificial intelligence systems.
 
-The accompanying dashboard provides a transparent, reproducible environment for analysing dataset quality, representational integrity, predictive performance, fairness, calibration, accountability, feedback contamination, and governance trade-offs using a healthcare benchmark dataset.
+Using a healthcare benchmark dataset, the project evaluates how computational systems can produce outputs that appear objective or authoritative while potentially concealing limitations in data representation, subgroup performance, model validation, decision thresholds, feedback processes, and institutional governance.
+
+The accompanying Streamlit dashboard provides an interactive environment for exploring the empirical analyses, visualisations, and governance interpretations.
 
 ---
 
 ## 🎯 Research Objectives
 
-The project investigates how governance failures emerge across the AI lifecycle through empirical evaluation of:
+The project investigates six dimensions of governance risk:
 
-- Dataset quality
-- Representational distortion
-- Synthetic bias amplification
-- Validation illusion
-- Accountability diffusion
-- Feedback contamination
-- Governance misfit
+1. **Demographic Representation Imbalance:** Examines the distribution of demographic characteristics in the dataset and their implications for representation.
+2. **Subgroup Predictive Disparity:** Evaluates differences in predictive performance across demographic subgroups.
+3. **Validation–Governance Gap:** Examines the limitations of conventional model validation when considered alongside broader governance requirements.
+4. **Threshold-Dependent Decision Governance:** Investigates how decision thresholds influence classification outcomes and associated governance trade-offs.
+5. **Feedback Contamination:** Uses illustrative analysis to examine how feedback processes can affect subsequent computational outputs.
+6. **Governance Misfit:** Explores potential misalignment between model-level evaluation and the institutional contexts in which computational decisions are applied.
 
 ---
 
 ## 📊 Dashboard Features
 
-The interactive dashboard contains:
+The interactive dashboard contains the following sections:
 
-- Dataset Audit
-- Exploratory Data Analysis
-- Representational Distortion
-- Synthetic Bias Amplification
-- Validation Illusion
-- Accountability Diffusion
-- Feedback Contamination
-- Governance Misfit
-- Overall Governance Report
-- Research Download Centre
-
----
-
-## 🛠️ Technology Stack
-
-- Python
-- Streamlit
-- Pandas
-- NumPy
-- Scikit-learn
-- XGBoost
-- Matplotlib
-- Seaborn
-- Jupyter Notebook
-- Git & GitHub
+- **Home:** Project introduction, research context, and dashboard navigation.
+- **Dataset Audit:** Overview of the dataset, variables, data quality, and preliminary checks.
+- **Exploratory Data Analysis:** Descriptive statistics and visual exploration of the dataset.
+- **Demographic Representation Imbalance:** Analysis of demographic distributions and representation.
+- **Subgroup Predictive Disparity:** Evaluation of model performance across demographic subgroups.
+- **Validation–Governance Gap:** Examination of model validation results and governance limitations.
+- **Threshold-Dependent Decision Governance:** Analysis of threshold-sensitive classification outcomes.
+- **Feedback Contamination:** Illustrative examination of feedback-related governance risks.
+- **Governance Misfit:** Analysis of potential gaps between computational evaluation and institutional governance requirements.
+- **Overall Governance Report:** Consolidated presentation of the governance findings.
+- **Research Downloads:** Access to available research datasets, analytical outputs, figures, and reports.
 
 ---
 
-## ⭐ Key Contributions
+## 🧰 Technology Stack
 
-- Developed an operational framework for evaluating governance risks associated with simulated subjecthood.
-- Built an end-to-end reproducible analytical pipeline for empirical AI governance research.
-- Produced publication-ready tables, figures, and governance metrics.
-- Designed a multi-page interactive Streamlit dashboard for transparent exploration of results.
-- Integrated downloadable research artefacts to promote reproducibility and open scientific practice.
+- **Programming Language:** Python
+- **Dashboard Framework:** Streamlit
+- **Data Analysis:** Pandas, NumPy
+- **Machine Learning:** Scikit-learn, XGBoost
+- **Data Visualisation:** Matplotlib, Seaborn
+- **Development Environment:** Jupyter Notebook
+- **Version Control:** Git and GitHub
 
 ---
 
 ## 📁 Repository Structure
 
 ```text
-dashboard/
+simulated_subjecthood/
 │
-├── Home.py
-├── pages/
-
-data/
+├── dashboard/
+│   ├── Home.py
+│   ├── pages/
+│   ├── assets/
+│   │   └── images/
+│   └── utils.py
 │
-├── raw/
-
-notebooks/
-
-outputs/
-├── dataset/
-├── figures/
-├── models/
-├── reports/
-└── tables/
-
-src/
-
-README.md
-requirements.txt
+├── data/
+│   └── raw/
+│
+├── notebooks/
+│
+├── outputs/
+│   ├── dataset/
+│   ├── figures/
+│   ├── reports/
+│   └── tables/
+│
+├── src/
+│
+├── requirements.txt
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-## 🚀 Installation
+## ⚙️ Installation and Setup
 
-Clone the repository:
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/AkaogorEmmanuelUkamaka/simulated_subjecthood.git
 ```
 
-Navigate into the project directory:
+### 2. Navigate into the project directory
 
 ```bash
 cd simulated_subjecthood
 ```
 
-Install the required dependencies:
+### 3. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+### 4. Activate the virtual environment
+
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux:**
+
+```bash
+source .venv/bin/activate
+```
+
+### 5. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Launch the Streamlit dashboard:
+### 6. Launch the dashboard
 
 ```bash
 streamlit run dashboard/Home.py
-or
-python -m streamlit run dashboard/Home.py
 ```
+
+The dashboard will open in your default browser. If it does not, use the local URL displayed in your terminal.
 
 ---
 
 ## 📦 Project Outputs
 
-The analytical pipeline generates:
+The repository includes analytical materials associated with the research, including:
 
-- Publication-ready tables
-- Publication-ready figures
-- Trained machine learning models
-- Governance metrics
-- Fairness evaluations
-- Calibration analyses
-- Downloadable research artefacts
-
-All outputs are automatically generated from the analytical workflow to ensure transparency and reproducibility.
+- Dataset audit and exploratory analysis outputs.
+- Model evaluation and subgroup performance results.
+- Governance analysis tables.
+- Visualisations and figures.
+- Consolidated governance reporting materials.
 
 ---
 
-## 📂 Dataset
+## 📚 Dataset
 
-The empirical analyses presented in this project use the publicly available **Heart Failure Prediction Dataset**.
+The empirical analysis uses the **[Heart Failure Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction)**, made available by Fedesoriano on Kaggle.
 
-- **Author:** Fedesoriano
-- **Platform:** Kaggle
-- **Purpose:** Benchmark healthcare dataset used to evaluate governance risks associated with simulated subjecthood.
+The dataset provides a healthcare benchmark for examining classification performance and selected demographic and clinical variables.
 
-Dataset:
-<https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction>
+---
 
+## 🔬 Research and Analytical Scope
 
-## 🙏 Acknowledgements
+The project distinguishes between empirical model evaluation, illustrative simulations, and conceptual governance interpretation.
 
-This project was developed as part of ongoing research into AI governance, accountability, fairness, transparency, and simulated subjecthood.
+Empirical findings are grounded in the dataset and analytical procedures used in the project. Illustrative simulations are used to explore possible governance mechanisms and should not be interpreted as direct evidence of real-world institutional outcomes.
 
-Special appreciation is extended to collaborators, mentors, and the open-source community whose tools and resources supported the development of this work.
+The analyses are intended to support critical examination of the relationship between predictive performance, computational representation, and institutional governance. They do not establish clinical validity or prove that a model is suitable for deployment in a real healthcare setting.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
